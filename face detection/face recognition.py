@@ -3,7 +3,7 @@ import cv2
 # Method to draw boundary around the detected feature
 def drawrectangle(img,classifier,scalefactor,minneighbours,color,text):
     # Converting image to gray-scale
-    grey_img=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    grey_img=cv2.cvtColor(grey_img,cv2.COLOR_BGR2GRAY)
     features=classifier.detectMultiScale(img,scalefactor,minneighbours)
 
     coords=[]
@@ -23,7 +23,7 @@ def detect(img,classifier,mouthCascade,noseCascade):
     # the length of coords will be 0
 
     if len(coords)==4:
-        cropped_img=img[coords[0]:coords[0]+coords[2],coords[1]:coords[1]+coords[3]]
+        cropped_img=img[coords[1]:coords[1]+coords[3], coords[0]:coords[0]+coords[2]]
         coords = drawrectangle(cropped_img, noseCascade, 1.1, 4, color['green'], "Nose")
         coords = drawrectangle(cropped_img, mouthCascade, 1.1, 15, color['white'], "Mouth")
     return img

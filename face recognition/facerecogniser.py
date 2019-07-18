@@ -8,12 +8,12 @@ def drawrectangle(img,classifier,scalefactor,minneighbours,color,text):
     
     for (x,y,w,h) in features:
         cv2.rectangle(img,(x,y),(x+w,y+h),color,1)
-        id, _ = clf.predict(grey_img[y:y + h, x:x + w])
-        if(id==1):
+        id, conf = clf.predict(grey_img[y:y + h, x:x + w])
+        if(id==1 and conf<40):
             cv2.putText(img, "Harshit", (x, y - 4), cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 1, cv2.LINE_AA)
-        elif (id == 2):
+        elif (id == 2 and conf<40):
             cv2.putText(img, "Mom", (x, y - 4), cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 1, cv2.LINE_AA)
-        elif (id == 3):
+        elif (id == 3 and conf<40):
             cv2.putText(img, "Sakshi", (x, y - 4), cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 1, cv2.LINE_AA)
         else:
             cv2.putText(img, "Random", (x, y - 4), cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 1, cv2.LINE_AA)
